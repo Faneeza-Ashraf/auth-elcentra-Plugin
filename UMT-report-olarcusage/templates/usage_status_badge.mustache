@@ -1,0 +1,49 @@
+{{!
+    @template report_olarcusage/usage_status_badge
+
+    Usage status badge template.
+}}
+
+{{#lms_usage_status}}
+    {{#eq lms_usage_status 1}}
+        <span class="badge badge-danger usage-badge">
+            1 - {{#str}}usagestatus1, report_olarcusage{{/str}}
+        </span>
+    {{/eq}}
+    {{#eq lms_usage_status 2}}
+        <span class="badge badge-warning usage-badge">
+            2 - {{#str}}usagestatus2, report_olarcusage{{/str}}
+        </span>
+    {{/eq}}
+    {{#eq lms_usage_status 3}}
+        <span class="badge badge-success usage-badge">
+            3 - {{#str}}usagestatus3, report_olarcusage{{/str}}
+        </span>
+    {{/eq}}
+{{/lms_usage_status}}
+
+<style>
+.usage-badge {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+</style>
+

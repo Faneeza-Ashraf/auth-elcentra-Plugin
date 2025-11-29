@@ -1,0 +1,26 @@
+{{#haschartdata}}
+    <div class="chart-section">
+        <h2>{{#str}}comparisoncharttitle, report_olarcusage{{/str}}</h2>
+        <div class="chart-wrapper">
+            <div class="chart-canvas-container">
+                <canvas id="comparisonBarChart"></canvas>
+            </div>
+        </div>
+    </div>
+{{/haschartdata}}
+
+{{^haschartdata}}
+    <div class="alert alert-info">
+        {{#str}}nodata, report_olarcusage{{/str}}
+    </div>
+{{/haschartdata}}
+
+
+<style>
+/* Styling for this new report page */
+.chart-section { padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; background-color: #fff; margin-top: 30px; }
+.chart-wrapper { display: flex; }
+.chart-canvas-container { position: relative; flex: 1; min-width: 300px; height: 500px; }
+</style>
+
+{{{ footerjs }}}

@@ -1,0 +1,257 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template report_olarcusage/export_buttons
+
+    Export buttons template for the Custom Course Report plugin.
+}}
+
+<div class="export-buttons-container">
+    <div class="export-header">
+        <h3 class="export-title">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            {{#str}}export, moodle{{/str}}
+        </h3>
+        <p class="export-description">{{#str}}export_description, report_olarcusage{{/str}}</p>
+    </div>
+
+    <div class="export-buttons">
+        <a href="{{csv_url}}"
+           class="btn export-btn csv-btn"
+           title="{{#str}}exportcsv, report_olarcusage{{/str}}"
+           onclick="olarcusage.showExportLoading(this)">
+            <div class="btn-content">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <span class="btn-text">{{#str}}exportcsv, report_olarcusage{{/str}}</span>
+                <small class="btn-description">{{#str}}csv_description, report_olarcusage{{/str}}</small>
+            </div>
+        </a>
+
+        <a href="{{excel_url}}"
+           class="btn export-btn excel-btn"
+           title="{{#str}}exportexcel, report_olarcusage{{/str}}"
+           onclick="olarcusage.showExportLoading(this)">
+            <div class="btn-content">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                <span class="btn-text">{{#str}}exportexcel, report_olarcusage{{/str}}</span>
+                <small class="btn-description">{{#str}}excel_description, report_olarcusage{{/str}}</small>
+            </div>
+        </a>
+
+        <a href="{{pdf_url}}"
+           class="btn export-btn pdf-btn"
+           title="{{#str}}exportpdf, report_olarcusage{{/str}}"
+           onclick="olarcusage.showExportLoading(this)">
+            <div class="btn-content">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                <span class="btn-text">{{#str}}exportpdf, report_olarcusage{{/str}}</span>
+                <small class="btn-description">{{#str}}pdf_description, report_olarcusage{{/str}}</small>
+            </div>
+        </a>
+    </div>
+</div>
+
+<style>
+.export-buttons-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.export-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.export-title {
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.export-description {
+    color: #6c757d;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.export-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.export-btn {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.export-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.btn-content {
+    text-align: center;
+}
+
+.btn-content i {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.btn-text {
+    display: block;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.btn-description {
+    display: block;
+    color: #6c757d;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+/* CSV Button */
+.csv-btn::before {
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.csv-btn:hover {
+    border-color: #28a745;
+}
+
+.csv-btn i {
+    color: #28a745;
+}
+
+.csv-btn:hover .btn-text {
+    color: #28a745;
+}
+
+/* Excel Button */
+.excel-btn::before {
+    background: linear-gradient(90deg, #17a2b8, #20c997);
+}
+
+.excel-btn:hover {
+    border-color: #17a2b8;
+}
+
+.excel-btn i {
+    color: #17a2b8;
+}
+
+.excel-btn:hover .btn-text {
+    color: #17a2b8;
+}
+
+/* PDF Button */
+.pdf-btn::before {
+    background: linear-gradient(90deg, #dc3545, #fd7e14);
+}
+
+.pdf-btn:hover {
+    border-color: #dc3545;
+}
+
+.pdf-btn i {
+    color: #dc3545;
+}
+
+.pdf-btn:hover .btn-text {
+    color: #dc3545;
+}
+
+@media (max-width: 768px) {
+    .export-buttons-container {
+        padding: 25px 20px;
+    }
+
+    .export-buttons {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .export-btn {
+        padding: 18px;
+    }
+
+    .btn-content i {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+
+    .btn-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .export-buttons-container {
+        padding: 20px 15px;
+    }
+
+    .export-title {
+        font-size: 1.2rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .export-btn {
+        padding: 15px;
+    }
+
+    .btn-content i {
+        font-size: 2rem;
+    }
+}
+</style>
+

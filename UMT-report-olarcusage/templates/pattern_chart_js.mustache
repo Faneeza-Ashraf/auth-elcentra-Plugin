@@ -1,0 +1,48 @@
+{{! This template contains the JavaScript ONLY for the Pattern Usage BAR Chart. }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+M.report_olarcusage = M.report_olarcusage || {};
+ 
+M.report_olarcusage.init_pattern_chart = function(Y, data) {
+    const chartCanvas = document.getElementById('patternChartCanvas'); // Use a new ID
+    const legendContainer = document.getElementById('pattern-chart-legend');
+   
+    if (!chartCanvas || !data || data.length === 0) {
+        return;
+    }
+ 
+    const labels = data.map(item => item.school_name);
+    const percentages = data.map(item => item.percentage);
+   
+    // Create the legend.
+    let legendHtml = '';
+    labels.forEach(label => {
+        legendHtml += `<li><span class="legend-dot" style="background-color: rgba(54, 162, 235, 0.6)"></span> ${label}</li>`;
+    });
+    if (legendContainer) {
+        legendContainer.innerHTML = legendHtml;
+    }
+ 
+    const ctx = chartCanvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '% Pattern Compliance',
+                data: percentages,
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.y}%` } }
+            }
+        }
+    });
+};
+</script>

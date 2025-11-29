@@ -1,0 +1,20 @@
+<div class="report-container">
+    <div class="report-filters">
+        <h2 class="filter-title">{{#str}}filterreporttitle, report_olarcusage{{/str}}</h2>
+        {{{ filterform }}}
+    </div>
+
+    {{#showchart}}
+        {{#semesterid}}
+            <div class="chart-container" style="margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px;">
+                <h3 style="margin-top: 0; font-size: 1.5em; font-weight: 600;">{{#str}}charttitle, report_olarcusage{{/str}}</h3>
+                <canvas id="usageBarChart"></canvas>
+            </div>
+        {{/semesterid}}
+    {{/showchart}}
+</div>
+
+{{! This line now correctly renders the prepared JavaScript. }}
+{{{ footerjs }}}
+
+

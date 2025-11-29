@@ -1,0 +1,33 @@
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+M.report_olarcusage = M.report_olarcusage || {};
+M.report_olarcusage.init_comparison_chart = function(Y, data) {
+    const chartCanvas = document.getElementById('comparisonBarChart');
+    if (!chartCanvas || !data || data.length === 0) { return; }
+
+    const labels = data.map(item => item.semester_name);
+    const percentages = data.map(item => item.percentage);
+
+    const ctx = chartCanvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '% OLARC Pattern Compliance',
+                data: percentages,
+                backgroundColor: 'rgba(111, 66, 193, 0.6)', 
+                borderColor: 'rgba(111, 66, 193, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+};
+</script> 

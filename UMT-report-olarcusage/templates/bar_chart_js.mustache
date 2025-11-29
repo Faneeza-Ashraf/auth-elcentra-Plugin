@@ -1,0 +1,50 @@
+{{! This template contains the JavaScript ONLY for the Bar Chart. }}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+M.report_olarcusage = M.report_olarcusage || {};
+M.report_olarcusage.init_bar_chart = function(Y, params) {
+    const chartContainer = document.querySelector('.chart-container');
+    const chartCanvas = document.getElementById('usageBarChart');
+    let usageChart;
+
+    function fetchChartData(semesterId) {
+        const url = M.cfg.wwwroot + '/report/olarcusage/ajax_chart_data.php?semesterid=' + semesterId + '&sesskey=' + params.sesskey;
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0) {
+                    chartContainer.style.display = 'block';
+                    renderChart(data);
+                } else {
+                    chartContainer.style.display = 'none';
+                }
+            })
+            .catch(error => console.error('Error fetching bar chart data:', error));
+    }
+
+    function renderChart(data) {
+        const labels = data.map(item => item.school_name);
+        const percentages = data.map(item => item.usage_percentage);
+        if (usageChart) { usageChart.destroy(); }
+        const ctx = chartCanvas.getContext('2d');
+        usageChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '% Course Usage',
+                    data: percentages,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } } }
+        });
+    }
+
+    if (params.semesterid && params.semesterid > 0) {
+        fetchChartData(params.semesterid);
+    }
+};
+</script>

@@ -1,0 +1,125 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template report_olarcusage/report_header
+
+    Report header template for the Custom Course Report plugin.
+}}
+
+<div class="report-header">
+    <div class="header-content">
+        <h1 class="report-title">
+            <i class="fa fa-chart-bar" aria-hidden="true"></i>
+            {{title}}
+        </h1>
+        <p class="report-subtitle">{{subtitle}}</p>
+        <p class="report-generated">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            {{#str}}generated, moodle{{/str}}: {{generated_date}}
+        </p>
+    </div>
+</div>
+
+<style>
+.report-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.report-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.report-title i {
+    font-size: 2.2rem;
+}
+
+.report-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    opacity: 0.95;
+    font-weight: 500;
+}
+
+.report-generated {
+    font-size: 1rem;
+    opacity: 0.85;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .report-header {
+        padding: 30px 20px;
+    }
+
+    .report-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .report-title i {
+        font-size: 1.8rem;
+    }
+
+    .report-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .report-generated {
+        font-size: 0.9rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .report-header {
+        padding: 25px 15px;
+    }
+
+    .report-title {
+        font-size: 1.7rem;
+    }
+
+    .report-subtitle {
+        font-size: 1rem;
+    }
+}
+</style>
+

@@ -1,0 +1,271 @@
+{{!
+    @template report_olarcusage/report_statistics
+
+    Report statistics template.
+}}
+
+<div class="report-statistics">
+    <div class="statistics-header">
+        <h3 class="statistics-title">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i>
+            {{#str}}statistics, moodle{{/str}}
+        </h3>
+        <p class="statistics-description">{{#str}}statistics_description, report_olarcusage{{/str}}</p>
+    </div>
+
+    <div class="statistics-grid">
+        {{#statistics}}
+            <div class="stat-card">
+                <div class="stat-icon">
+                    {{#eq key "total_courses"}}
+                        <i class="fa fa-graduation-cap text-primary" aria-hidden="true"></i>
+                    {{/eq}}
+                    {{#eq key "total_students"}}
+                        <i class="fa fa-users text-success" aria-hidden="true"></i>
+                    {{/eq}}
+                    {{#eq key "total_assignments"}}
+                        <i class="fa fa-tasks text-warning" aria-hidden="true"></i>
+                    {{/eq}}
+                    {{#eq key "total_quizzes"}}
+                        <i class="fa fa-question-circle text-info" aria-hidden="true"></i>
+                    {{/eq}}
+                    {{#eq key "courses_with_outline"}}
+                        <i class="fa fa-file-text text-purple" aria-hidden="true"></i>
+                    {{/eq}}
+                    {{#eq key "avg_usage_percentage"}}
+                        <i class="fa fa-percent text-danger" aria-hidden="true"></i>
+                    {{/eq}}
+                </div>
+                <div class="stat-content">
+                    <div class="stat-value">{{value}}</div>
+                    <div class="stat-label">{{label}}</div>
+                </div>
+            </div>
+        {{/statistics}}
+    </div>
+
+    {{#show_detailed_stats}}
+        <div class="detailed-statistics">
+            <h4 class="detailed-title">{{#str}}detailed_statistics, report_olarcusage{{/str}}</h4>
+
+            <div class="detailed-grid">
+                <div class="detailed-stat">
+                    <span class="detailed-label">{{#str}}avg_assignments_per_course, report_olarcusage{{/str}}</span>
+                    <span class="detailed-value">{{avg_assignments}}</span>
+                </div>
+                <div class="detailed-stat">
+                    <span class="detailed-label">{{#str}}avg_students_per_course, report_olarcusage{{/str}}</span>
+                    <span class="detailed-value">{{avg_students}}</span>
+                </div>
+                <div class="detailed-stat">
+                    <span class="detailed-label">{{#str}}courses_with_high_usage, report_olarcusage{{/str}}</span>
+                    <span class="detailed-value">{{high_usage_courses}}</span>
+                </div>
+                <div class="detailed-stat">
+                    <span class="detailed-label">{{#str}}outline_completion_rate, report_olarcusage{{/str}}</span>
+                    <span class="detailed-value">{{outline_completion_rate}}%</span>
+                </div>
+            </div>
+        </div>
+    {{/show_detailed_stats}}
+</div>
+
+<style>
+.report-statistics {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.statistics-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.statistics-title {
+    color: #495057;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.statistics-description {
+    color: #6c757d;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stat-icon {
+    margin-bottom: 15px;
+}
+
+.stat-icon i {
+    font-size: 2.5rem;
+}
+
+.text-primary { color: #007bff !important; }
+.text-success { color: #28a745 !important; }
+.text-warning { color: #ffc107 !important; }
+.text-info { color: #17a2b8 !important; }
+.text-purple { color: #6f42c1 !important; }
+.text-danger { color: #dc3545 !important; }
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-value {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+    line-height: 1;
+}
+
+.stat-label {
+    color: #6c757d;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.detailed-statistics {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.detailed-title {
+    color: #495057;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.detailed-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.detailed-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.detailed-label {
+    color: #495057;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.detailed-value {
+    color: #667eea;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    .report-statistics {
+        padding: 25px 20px;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-icon i {
+        font-size: 2.2rem;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+    }
+
+    .detailed-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .detailed-stat {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .report-statistics {
+        padding: 20px 15px;
+    }
+
+    .statistics-title {
+        font-size: 1.3rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .statistics-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-icon i {
+        font-size: 2rem;
+    }
+
+    .stat-value {
+        font-size: 1.6rem;
+    }
+
+    .detailed-statistics {
+        padding: 20px;
+    }
+}
+</style>
+

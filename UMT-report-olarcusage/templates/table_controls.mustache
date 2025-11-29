@@ -1,0 +1,180 @@
+{{!
+    @template report_olarcusage/table_controls
+
+    Table controls template for search and filtering.
+}}
+
+<div class="table-controls">
+    <div class="search-container">
+        <label for="table-search" class="search-label">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            {{#str}}search{{/str}}:
+        </label>
+        <input type="text"
+               id="table-search"
+               class="form-control search-input"
+               placeholder="{{#str}}searchcourses, moodle{{/str}}"
+               aria-label="{{#str}}searchcourses, moodle{{/str}}">
+    </div>
+
+    <div class="controls-right">
+        <div class="results-info" id="results-info"></div>
+
+        <div class="table-actions">
+            <button type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    onclick="olarcusage.resetFilters()"
+                    title="{{#str}}resetfilters, report_olarcusage{{/str}}">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                {{#str}}reset, moodle{{/str}}
+            </button>
+
+            <button type="button"
+                    class="btn btn-outline-secondary btn-sm"
+                    onclick="olarcusage.printTable()"
+                    title="{{#str}}print, moodle{{/str}}">
+                <i class="fa fa-print" aria-hidden="true"></i>
+                {{#str}}print, moodle{{/str}}
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+.table-controls {
+    background: #f8f9fa;
+    padding: 20px 25px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.search-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.search-input {
+    max-width: 400px;
+    padding: 8px 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    outline: none;
+}
+
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.results-info {
+    color: #6c757d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.table-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.table-actions .btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.table-actions .btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.table-actions .btn i {
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px 20px;
+        gap: 12px;
+    }
+
+    .search-container {
+        min-width: auto;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .search-label {
+        justify-content: center;
+    }
+
+    .search-input {
+        max-width: none;
+    }
+
+    .controls-right {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .results-info {
+        text-align: center;
+    }
+
+    .table-actions {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .table-controls {
+        padding: 12px 15px;
+    }
+
+    .table-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .table-actions .btn {
+        justify-content: center;
+    }
+}
+</style>
+

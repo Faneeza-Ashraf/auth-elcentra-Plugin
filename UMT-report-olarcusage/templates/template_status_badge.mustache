@@ -1,0 +1,47 @@
+{{!
+    @template report_olarcusage/template_status_badge
+
+    Template status badge template.
+}}
+
+{{#template_status}}
+    {{#eq template_status "Yes"}}
+        <span class="badge badge-success template-badge">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            {{template_status}}
+        </span>
+    {{/eq}}
+    {{^eq template_status "Yes"}}
+        <span class="badge badge-secondary template-badge">
+            <i class="fa fa-times" aria-hidden="true"></i>
+            {{template_status}}
+        </span>
+    {{/eq}}
+{{/template_status}}
+
+<style>
+.template-badge {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.template-badge i {
+    font-size: 0.7em;
+}
+</style>
+

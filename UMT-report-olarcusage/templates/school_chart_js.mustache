@@ -1,0 +1,34 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+M.report_olarcusage = M.report_olarcusage || {};
+M.report_olarcusage.init_school_chart = function(Y, data) {
+    const chartCanvas = document.getElementById('schoolUsageBarChart');
+    if (!chartCanvas || !data || data.length === 0) { return; }
+
+    const labels = data.map(item => item.program_name);
+    const percentages = data.map(item => item.percentage);
+
+    const ctx = chartCanvas.getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '% LMS Usage',
+                data: percentages,
+                backgroundColor: 'rgba(40, 167, 69, 0.6)',
+                borderColor: 'rgba(40, 167, 69, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            scales: { x: { beginAtZero: true, max: 100, ticks: { callback: value => value + '%' } } },
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: context => `${context.dataset.label}: ${context.parsed.x}%` } }
+            }
+        }
+    });
+};
+</script>

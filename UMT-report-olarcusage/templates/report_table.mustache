@@ -1,0 +1,284 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template report_olarcusage/report_table
+
+    Report table template for the Custom Course Report plugin.
+}}
+
+<div class="report-table-section">
+    {{> report_olarcusage/table_controls }}
+
+    <div class="table-responsive report-table-container">
+        <table class="table table-striped table-hover report-table" id="olarcusage-table">
+            <thead class="table-header">
+                <tr>
+                    {{#headers}}
+                        <th class="sortable-header" data-column="{{@index}}" title="{{#str}}clicktosort, moodle{{/str}}">
+                            <span class="header-text">{{.}}</span>
+                            <span class="sort-indicator"></span>
+                        </th>
+                    {{/headers}}
+                </tr>
+            </thead>
+            <tbody>
+                {{#data}}
+                    <tr class="data-row" data-row-index="{{@index}}">
+                        <td class="data-cell" data-column="0">{{semester}}</td>
+                        <td class="data-cell" data-column="1">{{school}}</td>
+                        <td class="data-cell" data-column="2">{{program}}</td>
+                        <td class="data-cell" data-column="3">{{course_code}}</td>
+                        <td class="data-cell" data-column="4">{{course_title}}</td>
+                        <td class="data-cell" data-column="5">{{faculty}}</td>
+                        <td class="data-cell" data-column="6">{{email}}</td>
+                        <td class="data-cell" data-column="7">{{section}}</td>
+                        <td class="data-cell" data-column="8">{{assignments_given}}</td>
+                        <td class="data-cell" data-column="9">{{quizzes_taken}}</td>
+                        <td class="data-cell" data-column="10">{{chats}}</td>
+                        <td class="data-cell" data-column="11">{{learning_material_uploaded}}</td>
+                        <td class="data-cell" data-column="12">{{course_outline_added}}</td>
+                        <td class="data-cell" data-column="13">{{students_on_lms}}</td>
+                        <td class="data-cell" data-column="14">
+                            {{> report_olarcusage/usage_status_badge }}
+                        </td>
+                        <td class="data-cell" data-column="15">{{recording_link}}</td>
+                        <td class="data-cell" data-column="16">
+                            {{> report_olarcusage/course_link }}
+                        </td>
+                        <td class="data-cell" data-column="17">
+                            {{> report_olarcusage/template_status_badge }}
+                        </td>
+                        <td class="data-cell" data-column="18">
+                            {{> report_olarcusage/usage_percentage }}
+                        </td>
+                    </tr>
+                {{/data}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+.report-table-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.report-table-container {
+    max-height: 70vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+.report-table {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    min-width: 1800px;
+}
+
+.table-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table-header th {
+    border: none;
+    padding: 15px 12px;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+.table-header th:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sortable-header {
+    user-select: none;
+}
+
+.header-text {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.sort-indicator {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+    font-size: 0.8rem;
+}
+
+.sort-indicator::after {
+    content: '↕';
+}
+
+.sort-indicator.asc::after {
+    content: '↑';
+    opacity: 1;
+}
+
+.sort-indicator.desc::after {
+    content: '↓';
+    opacity: 1;
+}
+
+.data-row {
+    transition: background-color 0.2s ease;
+}
+
+.data-row:hover {
+    background-color: #f8f9fa;
+}
+
+.data-row.selected {
+    background-color: #e3f2fd !important;
+    border-left: 4px solid #2196f3;
+}
+
+.data-cell {
+    padding: 12px;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    word-wrap: break-word;
+    max-width: 200px;
+    text-align: center;
+}
+
+/* Specific column styling */
+.data-cell[data-column="4"], /* Course Title */
+.data-cell[data-column="5"], /* Faculty */
+.data-cell[data-column="6"] { /* Email */
+    text-align: left;
+    max-width: 250px;
+}
+
+.data-cell[data-column="3"] { /* Course Code */
+    font-weight: 600;
+    color: #495057;
+}
+
+.data-cell[data-column="8"], /* Assignments */
+.data-cell[data-column="9"], /* Quizzes */
+.data-cell[data-column="10"], /* Chats */
+.data-cell[data-column="11"], /* Learning Materials */
+.data-cell[data-column="13"], /* Students */
+.data-cell[data-column="15"] { /* Recording Links */
+    font-weight: 600;
+    color: #007bff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .report-table {
+        font-size: 0.8rem;
+        min-width: 1600px;
+    }
+
+    .table-header th {
+        padding: 12px 8px;
+        min-width: 100px;
+    }
+
+    .data-cell {
+        padding: 10px 8px;
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .report-table-container {
+        max-height: 60vh;
+    }
+
+    .report-table {
+        font-size: 0.75rem;
+        min-width: 1400px;
+    }
+
+    .table-header th {
+        padding: 10px 6px;
+        min-width: 80px;
+    }
+
+    .data-cell {
+        padding: 8px 6px;
+        max-width: 150px;
+    }
+}
+
+/* Loading state */
+.report-table.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.report-table.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Print styles */
+@media print {
+    .report-table-container {
+        max-height: none;
+        overflow: visible;
+    }
+
+    .report-table {
+        font-size: 0.7rem;
+        min-width: auto;
+    }
+
+    .table-header th,
+    .data-cell {
+        padding: 4px;
+    }
+
+    .data-row:hover {
+        background-color: transparent;
+    }
+}
+</style>
+

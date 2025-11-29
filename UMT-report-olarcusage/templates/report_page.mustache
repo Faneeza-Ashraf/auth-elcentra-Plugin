@@ -1,0 +1,80 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template report_olarcusage/report_page
+
+    Main report page template for the Custom Course Report plugin.
+
+    Context variables required for this template:
+    * title - Report title
+    * subtitle - Report subtitle (course name or "All Courses")
+    * generated_date - Date when report was generated
+    * courseid - Course ID (0 for site-wide)
+    * has_data - Boolean indicating if there is data to display
+    * headers - Array of table headers
+    * data - Array of report data rows
+    * statistics - Object containing summary statistics
+
+    Example context (JSON):
+    {
+        "title": "Custom Course Report",
+        "subtitle": "Introduction to Computer Science",
+        "generated_date": "15 July 2025",
+        "courseid": 123,
+        "has_data": true,
+        "headers": ["Semester", "School", "Program", ...],
+        "data": [{"semester": "Fall 2025", ...}],
+        "statistics": {"total_courses": 10, ...}
+    }
+}}
+
+<div class="olarcusage-page">
+    {{> report_olarcusage/report_header }}
+
+    {{! --- START: NEW CHART SECTION --- }}
+    {{! This section will be controlled by JavaScript. It is hidden by default. }}
+    <div class="chart-container" style="display: none; margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px;">
+        <h3 style="margin-top: 0; font-size: 1.5em; font-weight: 600;">{{#str}}charttitle, report_olarcusage{{/str}}</h3>
+        <canvas id="usageBarChart"></canvas>
+    </div>
+    {{! --- END: NEW CHART SECTION --- }}
+
+    {{> report_olarcusage/export_buttons }}
+
+    {{#has_data}}
+        {{> report_olarcusage/report_table }}
+        {{> report_olarcusage/report_statistics }}
+    {{/has_data}}
+
+    {{^has_data}}
+        {{> report_olarcusage/no_data_message }}
+    {{/has_data}}
+</div>
+
+<style>
+.olarcusage-page {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .olarcusage-page {
+        padding: 15px;
+    }
+}
+</style>

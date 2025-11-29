@@ -1,0 +1,37 @@
+<div class="pattern-report-container">
+    <div class="report-filters">
+        {{{ filterform }}}
+    </div>
+
+    {{! This block now uses a simple boolean flag and will NOT loop. }}
+    {{#haschartdata}}
+        <div class="chart-section">
+            <h2>{{#str}}patterncharttitle, report_olarcusage{{/str}} {{ selectedsemester }}</h2>
+            <div class="chart-wrapper">
+                <div class="chart-description">
+                    <p>{{#str}}patterndescription, report_olarcusage{{/str}}</p>
+                    <div class="chart-legend">
+                        <h4>{{#str}}school, report_olarcusage{{/str}}</h4>
+                        <ul id="pattern-chart-legend"></ul>
+                    </div>
+                </div>
+                <div class="chart-canvas-container">
+                    <canvas id="patternChartCanvas"></canvas>
+                </div>
+            </div>
+        </div>
+    {{/haschartdata}}
+</div>
+
+<style>
+/* Styling to match your mockup */
+.chart-section { padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; background-color: #fff; margin-top: 30px; }
+.chart-wrapper { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+.chart-description { flex: 1; min-width: 250px; }
+.chart-canvas-container { position: relative; flex: 2; min-width: 300px; height: 400px; }
+.chart-legend ul { list-style-type: none; padding: 0; margin: 0; }
+.chart-legend li { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em; }
+.legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 10px; }
+</style>
+
+{{{ footerjs }}}

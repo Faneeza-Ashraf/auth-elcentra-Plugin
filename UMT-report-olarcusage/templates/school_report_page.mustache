@@ -1,0 +1,26 @@
+<div class="school-report-container">
+    <div class="report-filters">
+        {{{ filterform }}}
+    </div>
+
+    {{! This block now uses a simple boolean flag and will NOT loop. }}
+    {{#haschartdata}}
+        <div class="chart-section">
+            <h2>{{#str}}schoolcharttitle, report_olarcusage{{/str}} {{ selectedschool }}</h2>
+            <div class="chart-wrapper">
+                <div class="chart-canvas-container">
+                    <canvas id="schoolUsageBarChart"></canvas>
+                </div>
+            </div>
+        </div>
+    {{/haschartdata}}
+</div>
+
+<style>
+/* Styling for this new report page */
+.chart-section { padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; background-color: #fff; margin-top: 30px; }
+.chart-wrapper { display: flex; }
+.chart-canvas-container { position: relative; flex: 1; min-width: 300px; height: 500px; }
+</style>
+
+{{{ footerjs }}}

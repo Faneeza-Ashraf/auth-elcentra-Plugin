@@ -1,0 +1,87 @@
+{{!
+    @template report_olarcusage/usage_percentage
+
+    Usage percentage template with progress bar.
+}}
+
+<div class="usage-percentage-container">
+    <div class="progress usage-progress">
+        {{#usage_activity_percent}}
+            {{#gte usage_activity_percent 80}}
+                <div class="progress-bar bg-success"
+                     style="width: {{usage_activity_percent}}%;"
+                     aria-valuenow="{{usage_activity_percent}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                </div>
+            {{/gte}}
+            {{#and (gte usage_activity_percent 60) (lt usage_activity_percent 80)}}
+                <div class="progress-bar bg-warning"
+                     style="width: {{usage_activity_percent}}%;"
+                     aria-valuenow="{{usage_activity_percent}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                </div>
+            {{/and}}
+            {{#lt usage_activity_percent 60}}
+                <div class="progress-bar bg-danger"
+                     style="width: {{usage_activity_percent}}%;"
+                     aria-valuenow="{{usage_activity_percent}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100">
+                </div>
+            {{/lt}}
+        {{/usage_activity_percent}}
+    </div>
+    <span class="percentage-text">{{usage_activity_percent}}%</span>
+</div>
+
+<style>
+.usage-percentage-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    min-width: 80px;
+}
+
+.usage-progress {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 20px;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
+}
+
+.percentage-text {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9rem;
+}
+</style>
+

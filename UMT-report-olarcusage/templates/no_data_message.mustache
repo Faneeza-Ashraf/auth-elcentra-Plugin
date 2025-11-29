@@ -1,0 +1,169 @@
+{{!
+    @template report_olarcusage/no_data_message
+
+    No data message template.
+}}
+
+<div class="no-data-container">
+    <div class="no-data-content">
+        <div class="no-data-icon">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </div>
+        <h3 class="no-data-title">{{#str}}nodata, report_olarcusage{{/str}}</h3>
+        <p class="no-data-description">{{#str}}nodata_description, report_olarcusage{{/str}}</p>
+
+        {{#courseid}}
+            <div class="no-data-actions">
+                <a href="{{course_url}}" class="btn btn-primary">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    {{#str}}backtocourse, moodle{{/str}}
+                </a>
+            </div>
+        {{/courseid}}
+
+        {{^courseid}}
+            <div class="no-data-suggestions">
+                <h4>{{#str}}suggestions, report_olarcusage{{/str}}</h4>
+                <ul class="suggestions-list">
+                    <li>{{#str}}suggestion1, report_olarcusage{{/str}}</li>
+                    <li>{{#str}}suggestion2, report_olarcusage{{/str}}</li>
+                    <li>{{#str}}suggestion3, report_olarcusage{{/str}}</li>
+                </ul>
+            </div>
+        {{/courseid}}
+    </div>
+</div>
+
+<style>
+.no-data-container {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin: 30px 0;
+}
+
+.no-data-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.no-data-icon {
+    margin-bottom: 20px;
+}
+
+.no-data-icon i {
+    font-size: 4rem;
+    color: #6c757d;
+    opacity: 0.7;
+}
+
+.no-data-title {
+    color: #495057;
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.no-data-description {
+    color: #6c757d;
+    margin-bottom: 25px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.no-data-actions {
+    margin-top: 20px;
+}
+
+.no-data-actions .btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.no-data-actions .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.no-data-suggestions {
+    margin-top: 30px;
+    text-align: left;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.no-data-suggestions h4 {
+    color: #495057;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.suggestions-list {
+    margin: 0;
+    padding-left: 20px;
+    color: #6c757d;
+}
+
+.suggestions-list li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .no-data-container {
+        padding: 40px 15px;
+    }
+
+    .no-data-icon i {
+        font-size: 3rem;
+    }
+
+    .no-data-title {
+        font-size: 1.3rem;
+    }
+
+    .no-data-description {
+        font-size: 0.9rem;
+    }
+
+    .no-data-suggestions {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .suggestions-list {
+        text-align: left;
+        padding-left: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .no-data-container {
+        padding: 30px 10px;
+    }
+
+    .no-data-icon i {
+        font-size: 2.5rem;
+    }
+
+    .no-data-title {
+        font-size: 1.2rem;
+    }
+
+    .no-data-actions .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+</style>
+
