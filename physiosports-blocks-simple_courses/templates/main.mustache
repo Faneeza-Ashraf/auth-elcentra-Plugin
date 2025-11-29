@@ -1,0 +1,48 @@
+{{!
+    @template block_simple_courses/main
+
+    This is the main template for the simple_courses block.
+    It creates a two-column master-detail layout. The left column lists
+    the courses, and the right column displays the activities for the
+    currently selected course.
+
+    Context variables:
+    * courses: An array of course objects. Each course object contains:
+    *   id: The course ID.
+    *   fullname: The full name of the course.
+    *   courseimage: The URL for the course's background image.
+    *   isactive: Boolean, true if this is the first course in the list.
+    *   activities: An object containing lectures, workshops, and live_events.
+}}
+<div class="simple-courses-container-v4">
+    <h2 class="block-title">My Courses</h2>
+
+    <div class="master-detail-container">
+        {{! Left Column: The list of courses to select from. }}
+        <div class="course-selector-column">
+            {{#courses}}
+                <div class="course-selector-item {{#isactive}}active{{/isactive}}" data-course-id="{{id}}" role="button" tabindex="0" style="background-image: url('{{{courseimage}}}');">
+                    <div class="selector-overlay"></div>
+                    <span class="selector-name">{{{ fullname }}}</span>
+                </div>
+            {{/courses}}
+        </div>
+
+        {{! Right Column: The activities for the selected course. }}
+        <div class="course-content-column">
+            {{#courses}}
+                <div class="course-activity-wrapper {{#isactive}}active{{/isactive}}" data-course-id="{{id}}">
+                    <div class="course-activities">
+                        {{#activities.lectures}}{{> block_simple_courses/activity_card }}{{/activities.lectures}}
+                        {{#activities.workshops}}{{> block_simple_courses/activity_card }}{{/activities.workshops}}
+                        {{#activities.live_events}}{{> block_simple_courses/activity_card }}{{/activities.live_events}}
+                    </div>
+                </div>
+            {{/courses}}
+        </div>
+    </div>
+    
+    {{^courses}}
+        <p>You are not enrolled in any courses.</p>
+    {{/courses}}
+</div>

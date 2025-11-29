@@ -1,0 +1,189 @@
+/* ------------------------------------------------------------------ */
+/* --- Main Block & Layout Styles --- */
+/* ------------------------------------------------------------------ */
+.block_simple_courses .simple-courses-container-v4 .block-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #002346;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #005eb8;
+    display: inline-block;
+}
+
+ .block_simple_courses .simple-courses-container-v4 .master-detail-container {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 10px;
+   }
+.block_simple_courses .simple-courses-container-v4 .course-selector-column {
+    flex: 1 1 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.block_simple_courses .simple-courses-container-v4 .course-content-column {
+    flex: 3 1 600px;
+}
+
+/* ------------------------------------------------------------------ */
+/* --- Left Column: Course Selector Styles --- */
+/* ------------------------------------------------------------------ */
+.block_simple_courses .simple-courses-container-v4 .course-selector-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1rem !important;
+    min-height: 62px;
+    border-radius: 0;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease;
+    background-size: cover;
+    background-position: center;
+    justify-content: left;
+}
+
+
+.block_simple_courses .simple-courses-container-v4 .selector-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(33, 53, 71, 0.85);
+    /* Dark blue/grey overlay */
+    z-index: 1;
+    transition: background-color 0.3s ease;
+    /* This is critical: it makes the overlay "click-through" so the button underneath receives user clicks. */
+    pointer-events: none;
+}
+
+.block_simple_courses .simple-courses-container-v4 .selector-name {
+    position: relative;
+    z-index: 2;
+    /* Ensures the text is on top of the overlay */
+}
+
+.block_simple_courses .simple-courses-container-v4 .course-selector-item.active .selector-overlay {
+    background-color: rgba(92, 184, 92, 0.85);
+    /* Green overlay for active state */
+}
+
+/* ------------------------------------------------------------------ */
+/* --- Right Column: Activity Styles --- */
+/* ------------------------------------------------------------------ */
+.block_simple_courses .simple-courses-container-v4 .course-activity-wrapper {
+    display: none;
+}
+
+.block_simple_courses .simple-courses-container-v4 .course-activity-wrapper.active {
+    display: block;
+}
+
+.block_simple_courses .simple-courses-container-v4 .course-activities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-card {
+    background-color: #EFEFEF;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-card-header {
+    padding: 6px 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    font-size: 1.25rem;
+    background: #06305a;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-card-body {
+   flex-grow: 1;
+       padding: 15px;
+       background-color: #EFEFEF;
+       color: #fff;
+}
+
+.block_simple_courses .simple-courses-container-v4 a.activity-content-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-image-wrapper {
+    background-color: #f0f0f0;
+    height: 120px;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-text-content {
+    padding-top: 15px;
+    text-align: center;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-subtitle {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-card-footer {
+    padding: 15px;
+    margin-top: auto;
+}
+
+.block_simple_courses .simple-courses-container-v4 .btn-activity-action {
+    display: block;
+    width: 100%;
+    background-color: #3fc75f;
+    color: #fff;
+    border: none;
+    padding: .375rem .75rem;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+    border-radius: 0;
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+}
+
+.block_simple_courses .simple-courses-container-v4 .btn-activity-action:hover {
+    background-color: #4cae4c;
+}
+
+.block_simple_courses .simple-courses-container-v4 .activity-content-empty {
+    width: 100%;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 0;
+}

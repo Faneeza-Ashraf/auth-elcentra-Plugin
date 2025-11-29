@@ -1,0 +1,42 @@
+{{!
+    @template block_simple_courses/activity_card
+
+    This is a reusable partial template for displaying a single activity card.
+    It is used for Lectures, Workshops, and Live Events.
+
+    Context variables:
+    * title: The card header title (e.g., "LECTURES").
+    * button_text: The text for the action button (e.g., "START").
+    * courseviewurl: The URL to the main course page (used as a fallback).
+    * content: An object with details of the first activity in the section. Can be null.
+    *   url: The direct URL to the activity.
+    *   image: The URL for the activity's thumbnail image.
+    *   title: The main title of the activity.
+    *   subtitle: The subtitle of the activity.
+}}
+<div class="activity-card">
+    <div class="activity-card-header">{{ title }}</div>
+    <div class="activity-card-body">
+        {{#content}}
+            <a href="{{{ url }}}" class="activity-content-link">
+                <div class="activity-image-wrapper">
+                    <img src="{{{ image }}}" class="activity-image" alt="">
+                </div>
+                <!--div class="activity-text-content">
+                    <h4 class="activity-title">{{{ title }}}</h4>
+                    {{#subtitle}}<p class="activity-subtitle">{{{ subtitle }}}</p>{{/subtitle}}
+                </div-->
+            </a>
+        {{/content}}
+        {{^content}}
+            <div class="activity-content-empty">
+                {{! This placeholder shows when a section has no activities. }}
+            </div>
+        {{/content}}
+    </div>
+    <div class="activity-card-footer">
+        <a href="{{#content}}{{{ url }}}{{/content}}{{^content}}{{{ courseviewurl }}}{{/content}}" class="btn btn-primary btn-activity-action">
+            {{ button_text }}
+        </a>
+    </div>
+</div>
