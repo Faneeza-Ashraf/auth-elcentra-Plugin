@@ -1,0 +1,174 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_courseoutline/message
+
+    Message template for success and error messages.
+
+    Context variables required for this template:
+    * message - The message text to display
+    * type - The type of message ('success', 'error', 'warning', 'info')
+
+    Example context (JSON):
+    {
+        "message": "Course outline uploaded successfully!",
+        "type": "success"
+    }
+}}
+
+<div class="courseoutline-message message-{{type}}">
+    {{#type}}
+        {{#eq type "success"}}
+            <div class="alert alert-success" role="alert">
+                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                <span class="message-text">{{message}}</span>
+            </div>
+        {{/eq}}
+        
+        {{#eq type "error"}}
+            <div class="alert alert-danger" role="alert">
+                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                <span class="message-text">{{message}}</span>
+            </div>
+        {{/eq}}
+        
+        {{#eq type "warning"}}
+            <div class="alert alert-warning" role="alert">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <span class="message-text">{{message}}</span>
+            </div>
+        {{/eq}}
+        
+        {{#eq type "info"}}
+            <div class="alert alert-info" role="alert">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span class="message-text">{{message}}</span>
+            </div>
+        {{/eq}}
+    {{/type}}
+</div>
+
+<style>
+.courseoutline-message {
+    margin: 15px 0;
+}
+
+.courseoutline-message .alert {
+    border-radius: 8px;
+    padding: 15px 20px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.courseoutline-message .alert i {
+    font-size: 1.2em;
+    flex-shrink: 0;
+}
+
+.message-text {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Success messages */
+.courseoutline-message .alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.courseoutline-message .alert-success i {
+    color: #28a745;
+}
+
+/* Error messages */
+.courseoutline-message .alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.courseoutline-message .alert-danger i {
+    color: #dc3545;
+}
+
+/* Warning messages */
+.courseoutline-message .alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.courseoutline-message .alert-warning i {
+    color: #ffc107;
+}
+
+/* Info messages */
+.courseoutline-message .alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.courseoutline-message .alert-info i {
+    color: #17a2b8;
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+    .courseoutline-message .alert {
+        padding: 12px 15px;
+        gap: 10px;
+    }
+    
+    .courseoutline-message .alert i {
+        font-size: 1.1em;
+    }
+    
+    .message-text {
+        font-size: 0.9em;
+    }
+}
+
+/* Animation for new messages */
+.courseoutline-message .alert {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover effects for interactive messages */
+.courseoutline-message .alert:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+</style>
+

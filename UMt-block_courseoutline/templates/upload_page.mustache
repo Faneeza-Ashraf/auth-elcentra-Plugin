@@ -1,0 +1,249 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_courseoutline/upload_page
+
+    Upload page template for the Course Outline block.
+
+    Context variables required for this template:
+    * course_name - Name of the course
+    * back_url - URL to return to the course
+    * formhtml - The rendered HTML of the upload form
+
+    Example context (JSON):
+    {
+        "course_name": "Introduction to Computer Science",
+        "back_url": "http://example.com/course/view.php?id=123",
+        "formhtml": "<div>...</div>"
+    }
+}}
+
+<div class="courseoutline-upload-page">
+    <div class="page-header">
+        <div class="header-content">
+            <h1 class="page-title">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                {{#str}}upload_outline, block_courseoutline{{/str}}
+            </h1>
+            <p class="course-name">{{course_name}}</p>
+        </div>
+        
+        <div class="header-actions">
+            <a href="{{back_url}}" class="btn btn-outline-secondary back-btn">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                {{#str}}back_to_course, block_courseoutline{{/str}}
+            </a>
+        </div>
+    </div>
+    
+    <div class="upload-content">
+        <div class="upload-guidelines">
+            <div class="guidelines-card">
+                <h3>{{#str}}upload_instructions, block_courseoutline{{/str}}</h3>
+                <ul class="guidelines-list">
+                    <li>
+                        <i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i>
+                        Only PDF files are accepted
+                    </li>
+                    <li>
+                        <i class="fa fa-upload text-primary" aria-hidden="true"></i>
+                        Only one file can be uploaded per course
+                    </li>
+                    <li>
+                        <i class="fa fa-lock text-warning" aria-hidden="true"></i>
+                        Once uploaded, the file cannot be replaced
+                    </li>
+                    <li>
+                        <i class="fa fa-users text-success" aria-hidden="true"></i>
+                        Students will be able to download the outline
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="upload-form-section">
+            {{{formhtml}}}
+        </div>
+    </div>
+</div>
+
+<style>
+.courseoutline-upload-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.page-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.course-name {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.upload-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.guidelines-card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+.guidelines-card h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.guidelines-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guidelines-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f1f3f4;
+    color: #555;
+    font-weight: 500;
+}
+
+.guidelines-list li:last-child {
+    border-bottom: none;
+}
+
+.guidelines-list i {
+    font-size: 1.2em;
+    width: 20px;
+    text-align: center;
+}
+
+.upload-form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e9ecef;
+}
+
+@media (max-width: 768px) {
+    .courseoutline-upload-page {
+        padding: 15px;
+    }
+    
+    .page-header {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .upload-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .guidelines-card,
+    .upload-form-section {
+        padding: 20px;
+    }
+    
+    .guidelines-list li {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .page-header {
+        padding: 15px;
+    }
+    
+    .page-title {
+        font-size: 1.3rem;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .guidelines-card,
+    .upload-form-section {
+        padding: 15px;
+    }
+}
+</style>
+

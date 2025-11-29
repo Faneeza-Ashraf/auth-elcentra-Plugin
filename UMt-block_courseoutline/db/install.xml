@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="blocks/courseoutline/db" VERSION="20250715" COMMENT="XMLDB file for Moodle block_courseoutline plugin"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="block_courseoutline" COMMENT="Stores uploaded course outline information">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="teacherid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="fileid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timeuploaded" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="totalquizzes" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="Total number of quizzes"/>
+        <FIELD NAME="totalassignments" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="Total number of assignments"/>
+        <FIELD NAME="totalpresentations" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="Total number of presentations"/>
+        <FIELD NAME="totalworkshops" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="Total number of workshops"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="courseid" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id"/>
+        <KEY NAME="teacherid" TYPE="foreign" FIELDS="teacherid" REFTABLE="user" REFFIELDS="id"/>
+        <KEY NAME="fileid" TYPE="foreign" FIELDS="fileid" REFTABLE="files" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="courseid_idx" UNIQUE="false" FIELDS="courseid"/>
+        <INDEX NAME="teacherid_idx" UNIQUE="false" FIELDS="teacherid"/>
+        <INDEX NAME="fileid_idx" UNIQUE="false" FIELDS="fileid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
+

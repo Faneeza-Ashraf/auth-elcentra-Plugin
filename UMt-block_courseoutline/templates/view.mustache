@@ -1,0 +1,251 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template block_courseoutline/view
+
+    Main view template for the Course Outline block.
+
+    Context variables required for this template:
+    * hasoutline - Boolean indicating if course outline exists
+    * canupload - Boolean indicating if user can upload
+    * downloadurl - URL for downloading the outline (if hasoutline is true)
+    * uploadurl - URL for uploading the outline (if canupload is true and no outline exists)
+    * timeuploaded - Formatted date when outline was uploaded
+    * teachername - Name of teacher who uploaded the outline
+
+    Example context (JSON):
+    {
+        "hasoutline": true,
+        "canupload": true,
+        "downloadurl": "http://example.com/download.php?courseid=123",
+        "timeuploaded": "15 July 2025",
+        "teachername": "John Doe"
+    }
+}}
+
+<div class="block_courseoutline">
+    {{#hasoutline}}
+        <div class="outline-available">
+            <div class="outline-status">
+                <i class="fa fa-check-circle text-success" aria-hidden="true"></i>
+                <span class="status-text">{{#str}}outline_available, block_courseoutline{{/str}}</span>
+            </div>
+            
+            <div class="outline-actions">
+                <a href="{{{downloadurl}}}" 
+                   class="btn btn-primary btn-sm download-btn"
+                   aria-label="{{#str}}aria_download_outline, block_courseoutline{{/str}}"
+                   title="{{#str}}download_outline, block_courseoutline{{/str}}">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                    {{#str}}download_outline, block_courseoutline{{/str}}
+                </a>
+            </div>
+            
+            {{#canupload}}
+                <div class="outline-info">
+                    <small class="text-muted">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        {{#str}}uploaded_by, block_courseoutline{{/str}} {{teachername}}
+                        <br>
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        {{#str}}last_updated, block_courseoutline, {{timeuploaded}}{{/str}}
+                    </small>
+                </div>
+                <div class="outline-details">
+                <ul class="details-list">
+                    <li>{{#str}}total_quizzes, block_courseoutline{{/str}}: <strong>{{totalquizzes}}</strong></li>
+                    <li>{{#str}}total_assignments, block_courseoutline{{/str}}: <strong>{{totalassignments}}</strong></li>
+                    <li>{{#str}}total_presentations, block_courseoutline{{/str}}: <strong>{{totalpresentations}}</strong></li>
+                    <li>{{#str}}total_workshops, block_courseoutline{{/str}}: <strong>{{totalworkshops}}</strong></li>
+                </ul>
+            </div>
+            {{#canupdate}}
+                <div class="outline-actions update-action">
+                    <a href="{{{uploadurl}}}"
+                       class="btn btn-secondary btn-sm update-btn"
+                       title="{{#str}}update_outline, block_courseoutline{{/str}}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        {{#str}}update_outline, block_courseoutline{{/str}}
+                    </a>
+                </div>
+            {{/canupdate}}
+            {{/canupload}}
+        </div>
+    {{/hasoutline}}
+    
+    {{^hasoutline}}
+        {{#canupload}}
+            <div class="no-outline-upload">
+                <div class="outline-status">
+                    <i class="fa fa-exclamation-triangle text-warning" aria-hidden="true"></i>
+                    <span class="status-text">{{#str}}no_outline_yet, block_courseoutline{{/str}}</span>
+                </div>
+                
+                <div class="outline-actions">
+                    <a href="{{{uploadurl}}}" 
+                       class="btn btn-success btn-sm upload-btn"
+                       aria-label="{{#str}}aria_upload_outline, block_courseoutline{{/str}}"
+                       title="{{#str}}upload_outline, block_courseoutline{{/str}}">
+                        <i class="fa fa-upload" aria-hidden="true"></i>
+                        {{#str}}upload_outline, block_courseoutline{{/str}}
+                    </a>
+                </div>
+            </div>
+        {{/canupload}}
+        
+        {{^canupload}}
+            <div class="no-outline-student">
+                <div class="outline-status">
+                    <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+                    <span class="status-text">{{#str}}no_outline_available, block_courseoutline{{/str}}</span>
+                </div>
+            </div>
+        {{/canupload}}
+    {{/hasoutline}}
+</div>
+
+<style>
+.block_courseoutline {
+    padding: 15px;
+    text-align: center;
+}
+
+.outline-status {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.outline-status i {
+    font-size: 1.2em;
+}
+
+.status-text {
+    font-weight: 500;
+    color: #333;
+}
+
+.outline-actions {
+    margin-bottom: 15px;
+}
+
+.download-btn, .upload-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.download-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #0056b3;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.upload-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.upload-btn:hover {
+    background-color: #1e7e34;
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.outline-info {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+}
+
+.outline-info small {
+    line-height: 1.4;
+}
+
+.outline-info i {
+    margin-right: 4px;
+}
+
+.no-outline-student .outline-status {
+    color: #6c757d;
+}
+
+@media (max-width: 576px) {
+    .block_courseoutline {
+        padding: 10px;
+    }
+    
+    .download-btn, .upload-btn {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+    
+    .outline-info {
+        padding: 8px;
+    }
+}
+.outline-details {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.details-list li {
+    padding: 4px 0;
+}
+
+.update-action {
+    margin-top: 10px;
+}
+
+.update-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #5a6268;
+    color: white;
+}
+</style>
+
