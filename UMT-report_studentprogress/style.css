@@ -1,0 +1,63 @@
+.report-container {
+    padding: 10px;
+}
+
+.report-filters {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+#fgroup_id_filtergroup {
+    display: flex;
+    align-items: flex-end; 
+    gap: 15px; 
+    flex-wrap: wrap; 
+}
+
+#fgroup_id_filtergroup .fitem {
+    margin-bottom: 0 !important;
+}
+
+.report-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+
+.export-buttons .btn {
+    margin-left: 5px;
+}
+
+.olarcusage-table thead th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.category-header1 {
+    background-color: #eaf7e9 !important; 
+}
+
+.category-header2 {
+    background-color: #fef2cb !important; 
+}
+.report-filters form.mform {
+    display: flex; 
+    align-items: flex-end; 
+    flex-wrap: wrap; 
+    gap: 1.5rem; 
+   padding-top: 0.8rem; 
+}
+
+.report-filters .fitem {
+    margin-bottom: 0;
+}
+
+.export-buttons {
+    display: flex; 
+    gap: 0.5rem; 
+}
