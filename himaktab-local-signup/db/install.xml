@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/signup/db" VERSION="2024052305" COMMENT="XMLDB file for Moodle - local_signup"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_signup_data" COMMENT="Stores extra data from the custom signup form">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" COMMENT="FK to user.id"/>
+        <FIELD NAME="dateofbirth" TYPE="int" LENGTH="10" NOTNULL="false"/>
+        <FIELD NAME="homeaddress" TYPE="char" LENGTH="255" NOTNULL="false"/>
+        <FIELD NAME="parentname" TYPE="char" LENGTH="255" NOTNULL="false"/>
+        <FIELD NAME="emergencycontactname" TYPE="char" LENGTH="100" NOTNULL="false"/>
+        <FIELD NAME="emergencyphone" TYPE="char" LENGTH="50" NOTNULL="false"/>
+        <FIELD NAME="parentemail" TYPE="char" LENGTH="100" NOTNULL="false"/>
+        <FIELD NAME="phone2" TYPE="char" LENGTH="50" NOTNULL="false"/>
+        <FIELD NAME="healthinfo" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="specialneeds" TYPE="text" NOTNULL="false"/>
+        <FIELD NAME="desiredgrade" TYPE="char" LENGTH="50" NOTNULL="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="userid_idx" UNIQUE="true" FIELDS="userid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
