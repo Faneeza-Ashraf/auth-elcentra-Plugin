@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/cart/db" VERSION="20240101" COMMENT="XMLDB file for Moodle local/cart plugin">
+  <TABLES>
+    <TABLE NAME="local_cart_orders" COMMENT="Stores completed or pending cart orders for payment processing.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="totalamount" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" UNSIGNED="false" DEFAULT="0.00" SEQUENCE="false" />
+        <FIELD NAME="currency" TYPE="char" LENGTH="10" NOTNULL="true" DEFAULT="AUD" SEQUENCE="false" />
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending" COMMENT="e.g., pending, completed, failed" SEQUENCE="false" />
+        <FIELD NAME="paymentid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" COMMENT="Link to core_payment record after successful payment." SEQUENCE="false"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+        <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" />
+        <KEY NAME="paymentid_fk" TYPE="foreign" FIELDS="paymentid" REFTABLE="payment" REFFIELDS="id" />
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="local_cart_items" COMMENT="Items in a user's shopping cart.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="price" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" UNSIGNED="false" DEFAULT="0.00" SEQUENCE="false" />
+        <FIELD NAME="quantity" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" />
+        <FIELD NAME="licensetype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="individual" COMMENT="e.g., individual, coupon" SEQUENCE="false" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+        <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" />
+        <KEY NAME="courseid_fk" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" />
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="userid_courseid_uk" UNIQUE="true" FIELDS="userid, courseid" />
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="local_cart_order_items" COMMENT="Stores items associated with a completed order.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="orderid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" />
+        <FIELD NAME="price" TYPE="number" LENGTH="10" DECIMALS="2" NOTNULL="true" DEFAULT="0.00" SEQUENCE="false" />
+        <FIELD NAME="quantity" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="1" SEQUENCE="false" />
+        <FIELD NAME="licensetype" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="individual" SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+        <KEY NAME="orderid_fk" TYPE="foreign" FIELDS="orderid" REFTABLE="local_cart_orders" REFFIELDS="id" />
+        <KEY NAME="courseid_fk" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" />
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="local_cart_coupons" COMMENT="Stores coupons for course redemption.">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" />
+        <FIELD NAME="couponcode" TYPE="char" LENGTH="50" NOTNULL="true" COMMENT="The unique coupon code." SEQUENCE="false" />
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="The ID of the course this coupon is for." SEQUENCE="false" />
+        <FIELD NAME="purchasedbyuserid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="The user who originally purchased this coupon." SEQUENCE="false" />
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" />
+        <FIELD NAME="timeexpires" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" COMMENT="Timestamp when the coupon expires (0 if never expires)." SEQUENCE="false" />
+        <FIELD NAME="redeemedbyuserid" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" COMMENT="The user who redeemed this coupon (0 if not redeemed)." SEQUENCE="false" />
+        <FIELD NAME="timeredeemed" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" COMMENT="Timestamp when the coupon was redeemed (0 if not redeemed)." SEQUENCE="false" />
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="active" COMMENT="Status: active, redeemed, expired." SEQUENCE="false" />
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+        <KEY NAME="couponcode_uk" TYPE="unique" FIELDS="couponcode" />
+        <KEY NAME="courseid_fk" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" />
+        <KEY NAME="purchasedby_fk" TYPE="foreign" FIELDS="purchasedbyuserid" REFTABLE="user" REFFIELDS="id" />
+        <KEY NAME="redeemedby_fk" TYPE="foreign" FIELDS="redeemedbyuserid" REFTABLE="user" REFFIELDS="id" />
+      </KEYS>
+    </TABLE>
+
+    <TABLE NAME="local_cart_used_discounts" COMMENT="Logs the discount codes used by users">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="discount_code" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false"/>
+        <FIELD NAME="timeused" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

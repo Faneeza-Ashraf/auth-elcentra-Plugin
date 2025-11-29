@@ -1,0 +1,8 @@
+{{! This template's purpose is to load the required JavaScript on every page. }}
+{{#js}}
+    // This is a special Moodle template helper that loads JavaScript.
+    // It's a very reliable way to ensure a script runs.
+    require(['local_cart/cart_icon_update'], function(cartIconUpdate) {
+        cartIconUpdate.init();
+    });
+{{/js}}

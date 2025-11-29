@@ -1,0 +1,59 @@
+<!--
+    @template local_cart/my_orders_page
+    Displays the user's order history in a format matching the screenshot.
+
+    Context example:
+    {
+        "hasorders": true,
+        "orders": [
+            {
+                "date": "11/09/2025",
+                "totalformatted": "$0.00",
+                "items": [
+                    {
+                        "coursename": "Physio Bikefit Free Online Events",
+                        "licensetype": "Coupon",
+                        "priceformatted": "$0.00",
+                        "quantity": 1,
+                        "subtotalformatted": "$0.00"
+                    }
+                ]
+            }
+        ]
+    }
+-->
+
+<div class="order-history-container">
+    <h1 class="page-header">{{#str}}myorderhistory, local_cart{{/str}}</h1>
+
+    {{#hasorders}}
+        {{#orders}}
+            <div class="order-block">
+                <div class="order-summary-line">
+                    <span>{{#str}}date, core{{/str}}: {{date}}</span>
+                    <!--<span>{{#str}}total, local_cart{{/str}}: {{totalformatted}}</span>-->
+                    <span>
+                        {{#str}}total, local_cart{{/str}}: 
+                        {{#hasdiscount}}
+                            <s style="color: #f52e2ec2;">{{originaltotalformatted}}</s> 
+                        {{/hasdiscount}}
+                        <strong>{{finaltotalformatted}}</strong>
+                    </span>{{! Updated by Endush Fairy }}
+                </div>
+                {{#items}}
+                    <div class="order-item-line">
+                        <span class="item-details-name">{{coursename}}</span>
+                        <span class="item-details-licensetype">{{licensetype}}</span>
+                        <span class="item-details-price">{{priceformatted}} * {{quantity}}</span>
+                        <span class="item-details-subtotal">{{#str}}subtotal, local_cart{{/str}}: {{subtotalformatted}}</span>
+                    </div>
+                {{/items}}
+            </div>
+        {{/orders}}
+    {{/hasorders}}
+    {{^hasorders}}
+        <!--div class="alert alert-info" role="alert">
+            {{#str}}noordersfound, local_cart{{/str}}
+        </div--> 
+    {{/hasorders}}
+</div>

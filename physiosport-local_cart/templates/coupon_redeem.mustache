@@ -1,0 +1,39 @@
+<section class="banner-section">
+    <img src="{{wwwroot}}/theme/physiosports/pix/pic11.jpg" class="banner-image">
+    <div class="banner-overlay"></div>
+    <h1 class="banner-heading">{{title}}</h1>
+</section>
+
+<div class="container coupon-container">
+    <div class="card p-4">
+        <h4 class="mb-3 text-center coupon-heading">{{haveacoursecoupon}}</h4>
+        <form action="{{#url}}local/cart/coupon.php{{/url}}" method="POST" class="form-inline justify-content-center mb-4 coupon-form">
+            <div class="form-group mb-2 mr-sm-2 mb-sm-0">
+                <label for="couponcode" class="sr-only">{{couponcode_label}}</label>
+                <input type="text" class="form-control coupon-input" id="couponcode" name="couponcode" placeholder="{{couponcode_label}}"
+                    required>
+            </div>
+            <input type="hidden" name="sesskey" value="{{sesskey}}">
+            <button type="submit" class="btn btn-success coupon-btn">{{redeem_button}}</button>
+        </form>
+        {{#errormessage}}
+            <div class="text-danger text-center mt-2">{{{errormessage}}}</div>
+        {{/errormessage}}
+{{#show_success_box}}
+            <div class="coupon-success-inline">
+                <h2 class="congrats-title">Congratulations!</h2>
+                <p class="congrats-subtitle">You have been enrolled into course:</p>
+                <p class="congrats-coursename">
+                    <a href="{{{courseurl}}}">{{coursename}}</a>
+                </p>
+                <div class="congrats-actions">
+                    <a href="{{{courseurl}}}" class="btn btn-primary">Open Course</a>
+                    <a href="{{{backurl}}}" class="btn btn-primary">Back</a>
+                </div>
+            </div>
+        {{/show_success_box}} {{! Added by Endush Fairy}}
+        <div class="coupon-description-text text-muted text-center">
+            <p>{{coupondescription}}</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,573 @@
+/* local/cart/styles.css */
+
+/* Basic styling for the cart page container */
+.local-cart-page {
+    padding: 20px 0;
+    font-size: 0.9rem;
+    /* Slightly smaller text for compact look */
+}
+
+.local-cart-page h3 {
+    font-weight: 700 !important;
+    font-size: 1.640625rem;
+    line-height: 1.2;
+    text-transform: uppercase;
+    margin-bottom: .5rem;
+}
+
+.container-fluid.local-cart-page {
+    max-width: 1280px;
+}
+
+.cart-box {
+    background: #f8f9fa !important;
+    padding: 1rem !important;
+}
+
+/* Card styling */
+.local-cart-item-card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.local-cart-item-card .card-body {
+    padding: 0;
+    background: #f8f9fa !important;
+    border-bottom: 1px solid lightgrey;
+}
+
+/* Image Wrapper with "Online on Demand" Overlay */
+.local-cart-image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    /* Fixed height for image area */
+    overflow: hidden;
+    /* Hide overflow if image is too large */
+}
+
+.local-cart-course-image {
+    border: none;
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 0 !important;
+}
+
+.local-cart-ondemand-overlay {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+}
+
+/* Course Details */
+.local-cart-course-details .card-title {
+    margin-bottom: 0 !important;
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-bottom: .5rem !important;
+}
+
+.card-title {
+    min-height: 0 !important;
+}
+
+
+
+.local-cart-course-details {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+}
+
+.local-cart-course-details p {
+    margin-bottom: 0.3rem;
+    /* Tighter spacing for text */
+}
+
+/* Radio buttons */
+.local-cart-course-details .form-check-inline {
+    margin-right: 1rem;
+    font-size: 0.85rem;
+}
+
+.local-cart-course-details .form-check-label {
+    margin-left: 0.25rem;
+}
+
+/* Quantity input group specific styling */
+.local-cart-quantity-group {
+    max-width: 200px;
+    /* Limit width of the input group */
+    display: none;
+    /* Hidden by default, controlled by JS for 'coupon' */
+}
+
+.local-cart-quantity-group .input-group-text {
+    font-size: 0.85rem;
+}
+
+.local-cart-quantity-input {
+    text-align: center;
+}
+
+.local-cart-coupon-message {
+    font-size: 0.85rem;
+    color: #007bff;
+    /* Blue color for the message */
+    font-weight: bold;
+}
+
+.local-cart-individual-price {
+    font-size: 0.85rem;
+}
+
+
+/* Price and Remove Button */
+.local-cart-price-remove {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.local-cart-price-remove h4 {
+    color: #333;
+    /* Darker price color */
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+}
+
+.local-cart-remove-btn {
+    background: none;
+    /* Make button background transparent */
+    border: none;
+    /* Remove border */
+    padding: 0;
+    line-height: 1;
+    /* Adjust icon alignment */
+}
+
+.local-cart-remove-btn .icon {
+    font-size: 25px;
+    /* Size of the trash icon */
+}
+
+.d-flex.justify-content-between.font-weight-bold.mt-3 {
+    justify-content: right !important;
+}
+
+/* Order Summary */
+.local-cart-page .offset-md-1 {
+    margin-left: 0;
+    /* Standard Bootstrap offset */
+}
+
+.text-danger {
+    color: #2d2c2c !important;
+}
+
+.local-cart-page .card {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    background-color: transparent;
+}
+
+.local-cart-page .card-body hr {
+    border-top: 1px dashed #eee;
+    /* Dashed line for separation */
+}
+
+/* .local-cart-page .card-body .font-weight-bold {
+    font-size: 15px;
+    font-weight: bold !important;
+    gap: 5px;
+} */
+
+.btn-secondary {
+    background-color: #ced4da;
+    color: #212529;
+    padding: .375rem .75rem;
+    border-color: #ced4da;
+}
+
+.local-cart-actions.mt-3 {
+    display: flex;
+    justify-content: space-between !important;
+}
+
+.mycart .card-body {
+    background: #f8f9fa !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.border-cart {
+    border-bottom: 1px solid lightgrey !important;
+    margin-top: 1rem !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+
+    .local-cart-page .col-md-7,
+    .local-cart-page .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .local-cart-page .offset-md-1 {
+        margin-left: 0;
+        margin-top: 1.5rem;
+        /* Space between cart and summary on small screens */
+    }
+
+    .local-cart-page .local-cart-price-remove {
+        align-items: flex-start;
+        /* Align price/remove button to left on small screens */
+        margin-top: 1rem;
+    }
+
+    .local-cart-image-wrapper {
+        height: 80px;
+        /* Smaller image height on mobile */
+    }
+}
+
+.local-cart-coupon-quantity-display {
+    font-size: 0.85rem;
+    /* Hidden by default, JavaScript controls visibility */
+    display: none;
+}
+
+
+/* local/cart/styles.css */
+
+/* ... (existing styles) ... */
+
+/* Quantity input group specific styling (now a container for simpler elements) */
+.local-cart-quantity-container {
+    max-width: 250px;
+    /* Adjust width as needed */
+    display: none;
+    /* Hidden by default, controlled by JS for 'coupon' */
+}
+
+.local-cart-quantity-container label {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    /* Prevent "Quantity:" from wrapping */
+}
+
+.local-cart-quantity-container .form-control-sm {
+    height: calc(1.5em + .5rem + 2px);
+    /* Maintain Bootstrap's small input height */
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.local-cart-quantity-container span {
+    /* For the price text */
+    font-size: 0.85rem;
+}
+
+.local-cart-coupon-message {
+    font-size: 0.85rem;
+    color: #007bff;
+    /* Blue color for the message */
+    font-weight: bold;
+}
+
+.local-cart-individual-price {
+    font-size: 0.85rem;
+}
+
+
+/* local/cart/styles.css */
+
+/* ... (existing styles) ... */
+
+/* Quantity input group specific styling (now a container for simpler elements) */
+.local-cart-quantity-container {
+    max-width: 250px;
+    /* Adjust width as needed */
+    /* Remove default display: none here, let JS manage it with !important */
+}
+
+.local-cart-quantity-container label {
+    font-size: 0.85rem;
+    white-space: nowrap;
+    /* Prevent "Quantity:" from wrapping */
+}
+
+.local-cart-quantity-container .form-control-sm {
+    height: calc(1.5em + .5rem + 2px);
+    /* Maintain Bootstrap's small input height */
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.local-cart-quantity-container span {
+    /* For the price text */
+    font-size: 0.85rem;
+}
+
+.local-cart-coupon-message {
+    font-size: 0.85rem;
+    color: #007bff;
+    /* Blue color for the message */
+    font-weight: bold;
+}
+
+.local-cart-individual-price {
+    font-size: 0.85rem;
+}
+
+/* --- FORCE DISPLAY WITH !important FOR JS CONTROL --- */
+.local-cart-quantity-container.hidden-by-js {
+    display: none !important;
+}
+
+.local-cart-coupon-message.hidden-by-js {
+    display: none !important;
+}
+
+.local-cart-individual-price.hidden-by-js {
+    display: none !important;
+}
+
+.local-cart-quantity-container.shown-by-js-flex {
+    display: flex !important;
+}
+
+.local-cart-coupon-message.shown-by-js-block {
+    display: block !important;
+}
+
+.local-cart-individual-price.shown-by-js-block {
+    display: block !important;
+}
+
+/* --- END FORCE DISPLAY --- */
+
+/* ... (rest of the styles) ... */
+/* local/cart/styles.css */
+
+/* ... (existing styles) ... */
+
+/* Styles for the Coupon Redemption Page */
+.local-cart-coupon-page .redeem-coupon-header {
+    font-size: 2.5rem;
+    /* Large heading as in screenshot */
+    font-weight: bold;
+    color: #333;
+    /* Darker color */
+}
+
+.local-cart-coupon-page .card {
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.local-cart-coupon-page .form-inline .form-group {
+    margin-right: 1rem;
+    /* Space between input and button */
+}
+
+.local-cart-coupon-page .form-inline .form-control {
+    min-width: 250px;
+    /* Ensure input is wide enough */
+}
+
+.local-cart-coupon-page .coupon-description-text {
+    max-width: 800px;
+    /* Limit width of descriptive text */
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+/* --- Append this to the end of the file --- */
+
+.nav-item .cart-item-count-badge {
+    position: absolute;
+    top: 10px;      /* Adjust to move up/down */
+    right: 10px;    /* Adjust to move left/right */
+    color: white;
+    border-radius: 100px;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    text-align: center;
+}
+
+.modal-content{
+    border-radius: 0 !important;
+}
+
+/* --- Styles for My Orders Page --- */
+.order-history-container {
+    max-width: 960px;
+    margin: 2rem auto;
+}
+
+.order-history-container .page-header {
+    margin-bottom: 1.5rem;
+}
+
+.order-block {
+    background-color: #f8f9fa;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.order-summary-line {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.order-item-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-top: 1px solid #dee2e6;
+}
+
+.item-details-name { flex: 3; }
+.item-details-licensetype { flex: 1; text-align: center; }
+.item-details-price { flex: 1; text-align: center; }
+.item-details-subtotal { flex: 1; text-align: right; }
+
+@media (max-width: 767px) {
+    .order-item-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .item-details-name,
+    .item-details-licensetype,
+    .item-details-price,
+    .item-details-subtotal {
+        flex: 1;
+        width: 100%;
+        text-align: left !important;
+        padding: 2px 0;
+    }
+}
+
+/* --- NEW STYLES for Coupon Success Message to match target --- */
+.coupon-success-container {
+    padding: 2rem 0;
+    text-align: center;
+    margin: 2rem auto 0;
+}
+
+.coupon-success-container .success-heading {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #4d82b8;
+    margin-bottom: 1rem;
+}
+
+.coupon-success-container .success-enrolled-message {
+    font-size: 1.2rem;
+    color: #4d82b8;
+    margin-bottom: 0.5rem;
+}
+
+.coupon-success-container .success-course-link-wrapper {
+    margin-bottom: 2rem;
+}
+
+.coupon-success-container .success-course-name {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #4d82b8;
+}
+
+.coupon-success-container .success-course-name:hover {
+    color: #335d8d;
+    text-decoration: none;
+}
+
+.coupon-success-container .success-buttons .btn {
+    margin: 0 0.5rem;
+    padding: 0.6rem 2rem;
+    font-size: 1rem;
+    border: none;
+}
+
+.coupon-success-container .btn-success {
+    background-color: #79c843;
+    color: #fff;
+}
+
+.coupon-success-container .btn-success:hover {
+    background-color: #69b037;
+}
+
+/* Remove old conflicting styles */
+.coupon-success-box {
+    border: none;
+    padding: 0;
+}
+/* Added by Endush Fairy */
+.coupon-success-inline {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.congrats-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #4a8dd8;
+    margin: 0 0 10px 0;
+    border-bottom: none !important;
+}
+.congrats-subtitle {
+    font-size: 1.25rem;
+    color: #4a8dd8;
+    margin: 0;
+}
+
+.congrats-coursename {
+    margin: 20px 0 30px 0;
+}
+
+.congrats-coursename a {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #4a8dd8;
+    text-decoration: none;
+}
+
+.congrats-coursename a:hover {
+    text-decoration: underline;
+}
+
+.congrats-actions .btn {
+    font-size: 1rem;
+    padding: 8px 24px;
+    margin: 0 5px;
+}

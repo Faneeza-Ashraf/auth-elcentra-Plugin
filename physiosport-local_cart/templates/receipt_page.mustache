@@ -1,0 +1,72 @@
+{{! Tempplate for the receipt page after successful order completion
+Variables passed to this template
+items: array of purchased items with properties title, type, qty, cost
+subtotal: subtotal amount
+coupon: coupon amount (if any)
+total: total amount
+billed_to_name: name of the person billed
+billed_to_email: email of the person billed
+Created by Endush Fairy
+}}
+
+<div class="local_cart_receipt_container">
+
+    <div class="order-completed-header">
+        <h2>
+            <i class="fa fa-check-circle"></i>{{#str}} receiptpageheading, local_cart {{/str}}
+        </h2>
+        <p>{{#str}} receiptpageparagraph, local_cart {{/str}}</p>
+    </div>
+
+    <div class="order-details">
+        <table class="table generltable">
+            <thead>
+                <tr>
+                    <th class="header">{{#str}} coursetitle, local_cart {{/str}}</th>
+                    <th class="header">{{#str}} paymenttype, local_cart {{/str}}</th>
+                    <th class="header">{{#str}} quantity, local_cart {{/str}}</th>
+                    <th class="header text-right">{{#str}} cost, local_cart {{/str}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#items}}
+                <tr>
+                    <td>{{ title }}</td>
+                    <td>{{ type }}</td>
+                    <td>{{ qty }}</td>
+                    <td class="text-right">{{ cost }}</td>
+                </tr>
+                {{/items}}
+            </tbody>
+        </table>
+
+        <div class="totals">
+            <div class="total-row">
+                <span class="total-label">{{#str}} subtotal_cap, local_cart {{/str}}</span>
+                <span class="total-value">{{ subtotal }}</span>
+            </div>
+            <div class="total-row">
+                <span class="total-label">{{#str}} coupon_cap, local_cart {{/str}}</span>
+                <span class="total-value">{{ coupon }}</span>
+            </div>
+            <hr class="total-divider">
+            <div class="total-row grand-total">
+                <span class="total-label">{{#str}} total_cap, local_cart {{/str}}</span>
+                <span class="total-value">{{ total }}</span>
+            </div>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+
+    <div class="billing-details">
+        <h3>{{#str}} billing, local_cart {{/str}}</h3>
+        <p>
+            {{ billed_to_name }}<br>
+            {{ billed_to_email }}
+        </p>
+            <a href="/" class="btn btn-primary">
+                {{#str}} backtohome, local_cart {{/str}}
+            </a>
+    </div>
+
+</div>

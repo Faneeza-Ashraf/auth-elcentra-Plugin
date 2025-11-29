@@ -1,0 +1,192 @@
+<div class="container-fluid local-cart-page">
+    <div class="row justify-content-center">
+
+        {{! Left Column: My Cart }}
+        <div class="col-md-8 mb-4 mycart">
+        <div class="cart-box">
+            <h3 class="mb-3">{{#str}}mycart, local_cart{{/str}}</h3>
+
+            {{#isemptycart}}
+                <p class="cart-summary">{{#str}}cartempty, local_cart{{/str}}</p>
+            {{/isemptycart}}
+            {{^isemptycart}}
+                {{#cartitems}}
+                    <div class="card mb-3 local-cart-item-card" data-cartitemid="{{cartitemid}}">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+
+                                {{! Course Image }}
+                                <div class="col-md-4 col-sm-4 text-center local-cart-image-wrapper">
+                                    <img src="{{image}}" alt="{{fullname}}" class="img-fluid rounded local-cart-course-image">
+                                </div>
+
+                                {{! Course Details }}
+                                <div class="col-md-6 col-sm-5 local-cart-course-details">
+                                    <h5 class="card-title">{{fullname}}</h5>
+                                    <div class="form-check form-check-inline mt-2">
+                                        <input class="form-check-input licensetype-radio" type="radio"
+                                               name="licensetype-{{cartitemid}}" id="individual-{{cartitemid}}" value="individual"
+                                               {{#is_individual_licensetype}}checked{{/is_individual_licensetype}}
+                                               data-cartitemid="{{cartitemid}}">
+                                        <label class="form-check-label" for="individual-{{cartitemid}}">{{#str}}individual, local_cart{{/str}}</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input licensetype-radio" type="radio"
+                                               name="licensetype-{{cartitemid}}" id="coupon-{{cartitemid}}" value="coupon"
+                                               {{#is_coupon_licensetype}}checked{{/is_coupon_licensetype}}
+                                               data-cartitemid="{{cartitemid}}">
+                                       <label class="form-check-label" for="coupon-{{cartitemid}}">{{#str}}coupon, local_cart{{/str}} <i class="icon fa fa-question-circle fa-fw" aria-hidden="true" role="button" tabindex="0" data-toggle="modal" data-target="#couponHelpModal" title="{{#str}}whatisacoupon_title, local_cart{{/str}}"></i></label>
+                                    </div>
+
+                                    <p class="mb-0 mt-2 local-cart-coupon-message">
+                                        {{#str}}youhaveselectedcoupon, local_cart{{/str}}
+                                    </p>
+
+                                    <div class="d-flex align-items-center mt-2 local-cart-quantity-container">
+                                        <label for="quantity-{{cartitemid}}" class="mb-0 mr-2">{{quantitylabel}}:</label>
+                                        <input type="number" class="form-control form-control-sm local-cart-quantity-input mr-2"
+                                               id="quantity-{{cartitemid}}" value="{{quantity}}" min="1" data-cartitemid="{{cartitemid}}"
+                                               aria-label="{{quantitylabel}}" style="width: 70px;">
+                                        <span>${{itemprice}} / {{#str}}license, local_cart{{/str}}</span>
+                                    </div>
+
+                                    <p class="mb-0 mt-2 local-cart-individual-price">
+                                        {{#str}}quantity, local_cart{{/str}}: <span class="local-cart-individual-quantity">{{quantity}}</span> ${{itemprice}} / {{#str}}license, local_cart{{/str}}
+                                    </p>
+                                </div>
+
+                                {{! Price and Remove Button }}
+                                <div class="col-md-2 col-sm-3 text-right local-cart-price-remove">
+                                    <h4 class="font-weight-bold mb-2 item-total-display cart-total" id="item-total-{{cartitemid}}">${{itemtotalformatted}}</h4>
+                                    <a href="{{{removeitemurl}}}" class="btn btn-default btn-sm local-cart-remove-btn">
+                                        <i class="icon fa fa-trash fa-fw text-danger" aria-hidden="true"></i>
+                                    </a>
+                                    <span class="sr-only">{{#str}}remove, local_cart{{/str}}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                           <div class="border-cart"></div>
+                    </div>
+                {{/cartitems}}
+            {{/isemptycart}}
+
+            {{! --- MODIFIED BUTTONS SECTION --- }}
+            <div class="local-cart-actions mt-3">
+                {{! This button is now always visible }}
+                <a href="{{myordersurl}}" class="btn btn-secondary cart-btn">{{#str}}myorders, local_cart{{/str}}</a>
+
+                
+                
+                {{^isemptycart}}
+                    {{! This block only shows when the cart is NOT empty }}
+                    {{#isguest}}
+                        <a href="{{{loginurl}}}" class="btn btn-primary ml-2">{{#str}}logintocheckout, local_cart{{/str}}</a>
+                    {{/isguest}}
+                    {{^isguest}}
+                        <div id="checkout-button-container">
+                            <a href="{{{freecheckouturl}}}" class="btn btn-primary ml-2" id="free-checkout-btn" {{^iszerototal}}style="display: none;"{{/iszerototal}}>
+                                {{#str}} completeorder, local_cart {{/str}}
+                            </a>
+                            <button
+                                data-action="core_payment/triggerPayment"
+                                data-component="local_cart"
+                                data-paymentarea="local_cart"
+                                data-itemid="{{paymentitemid}}"
+                                data-cost="${{paymentcost}}"
+                                data-description="{{paymentdescription}}"
+                                class="btn btn-primary ml-2" id="payment-btn" {{#iszerototal}}style="display: none;"{{/iszerototal}}
+                            >
+                                {{#str}} logintocheckout, local_cart {{/str}}
+                            </button>
+                        </div>
+                    {{/isguest}}
+                {{/isemptycart}}
+            </div>
+</div>
+        </div>
+
+        {{! Right Column: Order Summary }}
+        <div class="col-md-4 offset-md-1 mycart">
+        <div class="cart-box">
+            <h3 class="mb-3">{{#str}}ordersummary, local_cart{{/str}}</h3>
+            <div class="card">
+                <div class="card-body cart-body">
+                    <div id="order-summary-items">
+                    {{#cartitems}}
+                        <div class="d-flex justify-content-between summary-item" data-cartitemid="{{cartitemid}}">
+                            <span class="summary-item-name">{{fullname}} x <span class="summary-item-quantity">{{quantity}}</span></span>
+                            <span class="summary-item-total">${{itemtotalformatted}}</span>
+                        </div>
+                        <hr class="my-2">
+                    {{/cartitems}}
+                    </div>
+                     <hr class="my-2">
+                    
+                    <div id="discount-section" {{#has_discount}}style="display: none;"{{/has_discount}}>
+                        <div class="form-group mb-2">
+                            <label for="discountcode-input" class="small">{{#str}}discountcode, local_cart{{/str}}</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm cart-input" id="discountcode-input" placeholder="{{#str}}enterdiscountcode, local_cart{{/str}}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary btn-sm" type="button" id="apply-discount-btn">{{#str}}apply, local_cart{{/str}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="resellercode-input" class="small">{{#str}}resellercode, local_cart{{/str}}</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control form-control-sm cart-input" id="resellercode-input" placeholder="{{#str}}enterresellercode, local_cart{{/str}}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary btn-sm" type="button" id="apply-reseller-btn">{{#str}}apply, local_cart{{/str}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="discount-messages" class="small my-2"></div>
+                    
+                    <div id="discount-display" class="d-flex justify-content-between mt-2" {{^has_discount}}style="display: none !important;"{{/has_discount}}>
+                        <span>{{#str}}discount, local_cart{{/str}} (<span id="applied-code-name">{{applied_code}}</span>) <a href="#" id="remove-discount-link" class="text-danger">[{{#str}}remove, local_cart{{/str}}]</a></span>
+                        <span id="discount-amount-display">{{discountformatted}}</span>
+                    </div>
+                    
+                    <hr class="my-2">
+                    
+                    <div class="d-flex justify-content-between font-weight-bold mt-3 cart-summary">
+                        <span>{{#str}}total, local_cart{{/str}}:</span>
+                        <span id="overall-total-display">${{totalpriceformatted}}</span>
+                    </div>
+                    <p class="text-muted small text-right mt-1">{{#str}}incgst, local_cart{{/str}}</p>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>
+{{! --- START: Coupon Help Modal --- }}
+<div class="modal fade" id="couponHelpModal" tabindex="-1" role="dialog" aria-labelledby="couponHelpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="couponHelpModalLabel">{{#str}}whatisacoupon_title, local_cart{{/str}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="{{#str}}close, local_cart{{/str}}">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{#str}}whatisacoupon_body, local_cart{{/str}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{#str}}close, local_cart{{/str}}</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">{{#str}}ok, local_cart{{/str}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{#js}}
+    require(['core_payment/gateways_modal'], function(modal) {
+        modal.init();
+    });
+{{/js}}
