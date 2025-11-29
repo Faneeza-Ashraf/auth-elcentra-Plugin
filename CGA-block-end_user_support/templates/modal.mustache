@@ -1,0 +1,52 @@
+<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#usersupport">
+    Contact Technical Support
+</button>
+
+<div class="modal fade" id="usersupport" tabindex="-1" role="dialog" aria-labelledby="usersupportLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="usersupportLabel">Help Desk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p><b>Please submit your feedback, issues or concerns below:</b></p>
+        <form action="{{wwwroot}}/blocks/end_user_support/contact.php" method="POST">
+          
+          {{#loggedin}}
+            <input type="hidden" name="username" value="{{fullname}}">
+            <input type="hidden" name="email" value="{{email}}">
+          {{/loggedin}}
+          
+          {{^loggedin}}
+            <div class="form-group">
+              <label for="form78-name">Name:</label>
+              <input type="text" class="form-control" name="username" id="form78-name" required>
+            </div>
+            <div class="form-group">
+              <label for="form78-email">Email:</label>
+              <input type="email" class="form-control" name="email" id="form78-email" required>
+            </div>
+          {{/loggedin}}
+
+          <div class="form-group">
+            <label for="form78-subject">Subject:</label>
+            <input type="text" class="form-control" name="name" id="form78-subject" required>
+          </div>
+          <div class="form-group">
+            <label for="form78-message">Write your message below:</label>
+            <textarea class="form-control" name="description" id="form78-message" rows="4" required></textarea>
+          </div>
+          
+          <input type="hidden" name="url" value="{{pageurl}}">
+          <input type="text" name="checkf" value="" style="display:none">
+        <button type="submit" class="btn btn-secondary">Send Message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+  </div>
+</div>

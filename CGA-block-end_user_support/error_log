@@ -1,0 +1,21 @@
+[21-Jan-2024 12:01:11 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; auth_plugin_phone has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 22
+[21-Jan-2024 12:01:11 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; sendsmsdotpk has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 278
+[21-Jan-2024 19:21:28 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; auth_plugin_phone has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 22
+[21-Jan-2024 19:21:28 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; sendsmsdotpk has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 278
+[30-Jan-2024 14:27:13 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; auth_plugin_phone has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 22
+[30-Jan-2024 14:27:13 Etc/GMT-5] PHP Deprecated:  Methods with the same name as their class will not be constructors in a future version of PHP; sendsmsdotpk has a deprecated constructor in /home/paktalee/public_html/auth/phone/auth.php on line 278
+[13-Apr-2024 13:28:41 Etc/GMT-5] Default exception handler: A required parameter (description) was missing Debug: 
+Error code: missingparam
+* line 620 of /lib/moodlelib.php: moodle_exception thrown
+* line 15 of /blocks/end_user_support/contact.php: call to required_param()
+
+[29-Apr-2024 23:12:41 Etc/GMT-5] Default exception handler: A required parameter (description) was missing Debug: 
+Error code: missingparam
+* line 620 of /lib/moodlelib.php: moodle_exception thrown
+* line 15 of /blocks/end_user_support/contact.php: call to required_param()
+
+[05-Jun-2024 19:13:43 Etc/GMT-5] Default exception handler: A required parameter (description) was missing Debug: 
+Error code: missingparam
+* line 620 of /lib/moodlelib.php: moodle_exception thrown
+* line 15 of /blocks/end_user_support/contact.php: call to required_param()
+
